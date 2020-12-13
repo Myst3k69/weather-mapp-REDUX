@@ -1,65 +1,95 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import LineChart from "./LineChart";
+import RadarChart from "./RadarChart";
+import Nav from "./Nav";
 import { Link } from "react-router-dom";
-import CallAPI from "../services/CallAPI.js";
+import useFetch from "../services/useAPI";
 import Loader from "react-loader-spinner";
-import("../components/Weather.css");
+import { login } from "../actions";
+import { resetCity } from "../actions";
+import { seletCity } from "../actions";
+import { CRow, CCol } from "@coreui/react";
+
+import("../App.css");
 import("react-loader-spinner/dist/loader/css/react-spinner-loader.css");
 
+const Weather = () => {
+  // History
 
+  let history = useHistory();
+  // Store
+  const cityList = useSelector((state) => state.cities);
 
-const Weather = (props) => {
- 
+  const dispatch = useDispatch();
 
-  // Constants
-  const city = props.location.city;
+  //custom Hook
+  const [loader, setLoader] = useFetch(cityList);
+
+  //Constants
+
   const apiKey = process.env.REACT_APP_API_KEY;
 
   //states
   const [temp, setTemp] = useState();
-  const [findedCity, setFindedCity] = useState();
-  const [loader, setLoader] = useState(true);
+  const [findedCity, setFindedCity] = useState(true);
+
+  // Function to clean datas before coming back on Home Page
+
+  const backHome = () => {
+    history.push("/");
+    dispatch(seletCity(""));
+    dispatch(resetCity());
+  };
 
   useEffect(() => {
-    //   API Call
-    setTimeout(() => {
-      CallAPI(city, apiKey, setTemp, setFindedCity);
-      setLoader(false);
-    }, 1000);
-  }, [city]);
+    if (loader == true) {
+      dispatch(login());
+    }
+  }, [loader]);
 
   return (
     <>
+      {/* Display a loader while API fetching */}
 
-     {/* Display a loader while API fetching */}
-      {loader ? (
+      {!loader ? (
         <Loader
           type="Puff"
           color="#00BFFF"
           height={100}
           width={100}
           style={{ marginLeft: "50%", marginTop: "20%" }}
-          
         />
       ) : (
         <div className="App">
           <header className="App-header">
             <h1>React Weather App</h1>
-          </header>
-        {/* Display error message if city has not been found */}
-          {findedCity ? (
-            <>
 
-                {/* Change the background hot/cold depending on temperature */}
-              <main className={temp < 15 ? "cold" : "hot"}>
-                <h2>
-                  {city.toUpperCase()} : {Math.round(temp * 10) / 10} ° C
-                </h2>
-                {temp < 15 ? <h3>Il fait froid !</h3> : <h3> Il fait chaud</h3>}
-                <Link to="/">
-                  <button>Autre ville </button>
-                </Link>
+            <button className="homeButton" onClick={() => backHome()}>Autres villes </button>
+          </header>
+          {/* Display error message if city has not been found */}
+          {cityList.length > 0 ? (
+            <>
+              {/* Change the background hot/cold depending on temperature */}
+
+              <main>
+                <CRow>
+                  <CCol md="2">
+                    <Nav className="navCity"></Nav>
+                  </CCol>
+                  <CCol md="5">
+                    <LineChart></LineChart>
+                  </CCol>
+                  <CCol md="5">
+                    <RadarChart></RadarChart>
+                  </CCol>
+                </CRow>
               </main>
-              <footer>Test technique WeCount</footer>
+
+              <footer>
+                <h3>Test technique SAFECUBE</h3>{" "}
+              </footer>
             </>
           ) : (
             <h3 style={{ textAlign: "center" }}>

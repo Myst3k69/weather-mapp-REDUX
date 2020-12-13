@@ -1,24 +1,49 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../App.css";
+import {  useDispatch } from "react-redux";
+import { setCity } from "../actions";
+import { seletCity } from "../actions";
+
 
 const HomePage = () => {
+ 
+  const dispatch = useDispatch();
+
+ 
+
   // States
-  const [city, setCity] = useState("");
+  const [cities, setCities] = useState([]);
+  const [cityOne, setCityOne] = useState("");
+  const [cityTwo, setCityTwo] = useState("");
+  const [cityThree, setCityThree] = useState("");
+  const [cityFour, setCityFour] = useState("");
   const [emptysearch, setEmptySearch] = useState(true);
+  const [coord, setCoord] = useState();
+
   let history = useHistory();
+
+ 
+   
+     
+ 
 
   //Redirect to result page
   const getForecast = (e) => {
     e.preventDefault();
+    dispatch(setCity(cityOne));
+    dispatch(setCity(cityTwo));
+    dispatch(setCity(cityThree));
+    dispatch(setCity(cityFour));
+    dispatch(seletCity(cityOne));
+    cities.push(cityOne, cityTwo, cityThree, cityFour, coord, setCoord);
 
-    if (city !== "") {
-      setEmptySearch(true);
+    if (cityOne != "" && cityTwo != "" && cityThree != "" && cityFour != "") {
+      setEmptySearch(false);
       history.push({
         pathname: "/weather",
-        city: city,
       });
-    } else setEmptySearch(false);
+    } else setEmptySearch(true);
   };
 
   return (
@@ -27,12 +52,31 @@ const HomePage = () => {
         <h1>React Weather App</h1>
       </header>
       <main>
-        <form>
+        <form style={{ width: "300px", marginLeft: "40%" }}>
           <input
             type="text"
             placeholder="Entrer ville"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
+            value={cityOne}
+            onChange={(e) => setCityOne(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Entrer ville"
+            value={cityTwo}
+            onChange={(e) => setCityTwo(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Entrer ville"
+            value={cityThree}
+            onChange={(e) => setCityThree(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Entrer ville"
+            value={cityFour}
+            style={{ marginBottom: "20px" }}
+            onChange={(e) => setCityFour(e.target.value)}
           />
 
           <button type="submit" onClick={(e) => getForecast(e)}>
@@ -41,10 +85,10 @@ const HomePage = () => {
           </button>
 
           {/* Detect if user does not fill a city */}
-          {!emptysearch ? <h3>Merci de saisir une ville</h3> : ""}
+          {emptysearch ? <h3>Merci de saisir quatre villes</h3> : ""}
         </form>
       </main>
-      <footer>Test technique WeCount</footer>
+      <footer>Test technique SAFECUBE</footer>
       ...
     </div>
   );

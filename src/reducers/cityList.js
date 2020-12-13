@@ -14,12 +14,8 @@ const cityList = (state = "", action) => {
 
       return state;
 
-      case "RESET":
-      
-    
+    case "RESET":
       return "";
-
-  
 
     default:
       return state;

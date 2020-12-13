@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import "../App.css";
-import {  useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setCity } from "../actions";
 import { seletCity } from "../actions";
-
+import "../App.css";
 
 const HomePage = () => {
- 
   const dispatch = useDispatch();
-
- 
 
   // States
   const [cities, setCities] = useState([]);
@@ -19,14 +15,8 @@ const HomePage = () => {
   const [cityThree, setCityThree] = useState("");
   const [cityFour, setCityFour] = useState("");
   const [emptysearch, setEmptySearch] = useState(true);
-  const [coord, setCoord] = useState();
 
   let history = useHistory();
-
- 
-   
-     
- 
 
   //Redirect to result page
   const getForecast = (e) => {
@@ -36,7 +26,7 @@ const HomePage = () => {
     dispatch(setCity(cityThree));
     dispatch(setCity(cityFour));
     dispatch(seletCity(cityOne));
-    cities.push(cityOne, cityTwo, cityThree, cityFour, coord, setCoord);
+    cities.push(cityOne, cityTwo, cityThree, cityFour);
 
     if (cityOne != "" && cityTwo != "" && cityThree != "" && cityFour != "") {
       setEmptySearch(false);
@@ -85,11 +75,10 @@ const HomePage = () => {
           </button>
 
           {/* Detect if user does not fill a city */}
-          {emptysearch ? <h3>Merci de saisir quatre villes</h3> : ""}
+          {emptysearch ? <h4>Merci de saisir quatre villes</h4> : ""}
         </form>
       </main>
       <footer>Test technique SAFECUBE</footer>
-      ...
     </div>
   );
 };

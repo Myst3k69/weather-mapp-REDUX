@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-import { seletCity } from "../actions";
-import {
-  CCard,
-  CCardBody,
-  CCardGroup,
-  CCardHeader,
-  CContainer,
-  CRow,
-} from "@coreui/react";
-import { CChartLine, CChartRadar } from "@coreui/react-chartjs";
+import { useSelector } from "react-redux";
 
+import { CCard, CCardBody, CCardHeader } from "@coreui/react";
+import { CChartRadar } from "@coreui/react-chartjs";
 
 import("../App.css");
 

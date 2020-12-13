@@ -1,18 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  CCol,
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CNav,
-  CNavItem,
-  CNavLink,
-} from "@coreui/react";
+import { CCard, CCardBody, CNav, CNavItem, CNavLink } from "@coreui/react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { seletCity } from "../actions";
-import { setCity } from "../actions";
-import { login } from "../actions";
 
 const Nav = () => {
   // Store

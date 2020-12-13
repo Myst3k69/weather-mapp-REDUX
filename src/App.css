@@ -1,11 +1,8 @@
 .App {
-  display:flex;
+  display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
-
-
-
 
 .App-header {
   background-color: #282c34;
@@ -15,39 +12,28 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 
+  background-color: whitesmoke;
 }
-
-
-
 
 main {
   flex-grow: 1;
   text-align: center;
   padding: 25px;
- display:flex;
- flex-direction: row;
- align-items: center;
- justify-content: space-around;
- 
- 
- 
- 
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background-image: url("./img/earth6.jpg") !important;
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
 }
 
-canvas{
-
- 
-  height:450px!important;
-
+canvas {
+  height: 450px !important;
 }
-
-
-
-
-
 
 footer {
   padding: 2px;
@@ -56,7 +42,7 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #EEEEEE;
+  background: whitesmoke;
   font-size: small;
   text-align: center;
   font-size: 30px;
@@ -66,32 +52,38 @@ header {
 }
 
 h3 {
-
-  margin-top:20px!important;
+  margin-top: 20px !important;
+  color: black;
 }
 
+h4 {
+  color: white;
+  margin-top: 20px !important;
+}
 
 button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   border: none;
   color: white;
   padding: 8px 12px;
-  font-size: 20px!important;
+  font-size: 20px !important;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius: 6px!important;
-  height:50px;
-
+  border-radius: 6px !important;
+  height: 50px;
+  margin-top: 20px !important;
 }
 
-
-
 input {
-
   font-size: 16px;
   margin: 4px 2px;
   padding: 8px 14px;
   color: black;
   font-weight: bold;
+  border-radius: 5px;
+  opacity: 0.85;
+}
 
+form {
+  margin-top: 100px;
 }

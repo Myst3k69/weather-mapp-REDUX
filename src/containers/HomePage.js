@@ -11,11 +11,7 @@ const HomePage = () => {
 
   // States
   const [cities, setCities] = useState([]);
-
   const [cityOne, setCityOne] = useState("");
-  const [cityTwo, setCityTwo] = useState("");
-  const [cityThree, setCityThree] = useState("");
-  const [cityFour, setCityFour] = useState("");
   const [emptysearch, setEmptySearch] = useState(false);
   const [nbInputs, setNbInputs] = useState(["input-0"]);
 
@@ -27,7 +23,6 @@ const HomePage = () => {
 
     // Aucune ville renseignée
     if (cityOne.length === 0) {
-      console.log("aucune ville remplie");
       setEmptySearch(true);
     } else {
       // Une ville est remplie mais n'est pas validée par le formulaire (cas de la première ville)
@@ -54,15 +49,12 @@ const HomePage = () => {
   // Add city input
 
   const addCity = (e) => {
-
-e.preventDefault()
-
+    e.preventDefault();
 
     // Add inputs
     let newInput = `input-${nbInputs.length}`;
     setNbInputs((prevState) => prevState.concat([newInput]));
 
-   
     //Record values of cities
     setCities((prev) => [...prev, cityOne]);
     setCityOne("");
@@ -74,46 +66,47 @@ e.preventDefault()
         <h1>React Weather App</h1>
       </header>
       <main>
-        <form style={{ width: "300px"}}>
+        <form style={{ width: "300px" }}>
+          {/* Generate inputs dynamically */}
+          {nbInputs
+            ? nbInputs.map((input, i) => {
+                console.log("length : ", nbInputs.length);
+                return (
+                  <>
+                    {emptysearch ? (
+                      <Alert
+                        type="warning"
+                        message="Merci de saisir au moins une ville"
+                      ></Alert>
+                    ) : (
+                      ""
+                    )}
+                    <input
+                      type="text"
+                      placeholder="Entrer ville"
+                      value={cities[i]}
+                      key={i}
+                      onChange={(e) => setCityOne(e.target.value)}
+                    />
+                    {i === nbInputs.length - 1 ? (
+                      <button
+                        style={{ backgroundColor: "#0d86ff" }}
+                        onClick={(e) => addCity(e)}
+                      >
+                        Add city
+                      </button>
+                    ) : (
+                      ""
+                    )}
+                  </>
+                );
+              })
+            : ""}
 
-      {/* Generate inputs dynamically */}
-        {nbInputs
-          ? nbInputs.map((input, i) => {
-              console.log("length : ", nbInputs.length);
-              return (
-                <>
-
-                
-        {emptysearch ? (
-          <Alert
-            type="warning"
-            message="Merci de saisir au moins une ville"
-          ></Alert>
-        ) : (
-          ""
-        )}
-                  <input
-                    type="text"
-                    placeholder="Entrer ville"
-                    value={cities[i]}
-                    key={i}
-                    onChange={(e) => setCityOne(e.target.value)}
-                  />
-                  {i === nbInputs.length - 1 ? (
-                    <button  style={{backgroundColor:"#0d86ff"}} onClick={(e) => addCity(e)}>Add city</button>
-                  ) : (
-                    ""
-                  )}
-                </>
-              );
-            })
-          : ""}
-
-
-        <button type="submit"  onClick={(e) => getForecast(e)}>
-          {" "}
-          Prévisions{" "}
-        </button>
+          <button type="submit" onClick={(e) => getForecast(e)}>
+          
+            Forecasts
+          </button>
         </form>
       </main>
       <footer>Test technique SAFECUBE</footer>

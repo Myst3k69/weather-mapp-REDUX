@@ -34,7 +34,7 @@ export const resetCity = () => {
   };
 };
 
-export const login = () => {
+export const isLoadded = () => {
   return {
     type: "SIGN_IN",
   };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import LineChart from "./LineChart";
@@ -7,7 +7,7 @@ import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import useFetch from "../services/useAPI";
 import Loader from "react-loader-spinner";
-import { login } from "../actions";
+
 import { resetCity } from "../actions";
 import { seletCity } from "../actions";
 import { CRow, CCol } from "@coreui/react";
@@ -27,14 +27,6 @@ const Weather = () => {
   //custom Hook
   const [loader, setLoader] = useFetch(cityList);
 
-  //Constants
-
-  const apiKey = process.env.REACT_APP_API_KEY;
-
-  //states
-  const [temp, setTemp] = useState();
-  const [findedCity, setFindedCity] = useState(true);
-
   // Function to clean datas before coming back on Home Page
 
   const backHome = () => {
@@ -43,11 +35,7 @@ const Weather = () => {
     dispatch(resetCity());
   };
 
-  useEffect(() => {
-    if (loader == true) {
-      dispatch(login());
-    }
-  }, [loader]);
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -66,7 +54,9 @@ const Weather = () => {
           <header className="App-header">
             <h1>React Weather App</h1>
 
-            <button className="homeButton" onClick={() => backHome()}>Autres villes </button>
+            <button className="homeButton" onClick={() => backHome()}>
+              Autres villes{" "}
+            </button>
           </header>
           {/* Display error message if city has not been found */}
           {cityList.length > 0 ? (
@@ -74,7 +64,7 @@ const Weather = () => {
               {/* Change the background hot/cold depending on temperature */}
 
               <main>
-                <CRow>
+                <CRow style={{ marginTop: "50px" }}>
                   <CCol md="2">
                     <Nav className="navCity"></Nav>
                   </CCol>

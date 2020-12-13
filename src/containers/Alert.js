@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { CAlert, CProgress } from "@coreui/react";
 
 const Alert = (props) => {

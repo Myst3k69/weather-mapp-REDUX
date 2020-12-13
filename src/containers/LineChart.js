@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
-import { CChartLine, CChartRadar } from "@coreui/react-chartjs";
-import { useSelector, useDispatch } from "react-redux";
+import { CChartLine } from "@coreui/react-chartjs";
+import { useSelector} from "react-redux";
 
 
 import("../App.css");
@@ -19,25 +19,14 @@ const LineChart = () => {
   const getTemps = (selectedCity, cityList) => {
     if (selectedCity) {
       const selected = cityList.filter(
-        (city) => city.city == selectedCity[0].selectedCity
+        (city) => city.city === selectedCity[0].selectedCity
       );
 
       if (selected) {
         //Get forecast days
         getForecastDays(selected);
 
-        // Get datas for radar chart
-        const radarDatas = selected[0].forecastTemp.map((day) => {
-          const datas = {};
-          datas.humidity = day.clouds;
-          datas.uvi = day.uvi;
-          datas.pressure = day.pressure;
-          datas.winspeed = day.wind_speed;
-          datas.pop = day.pop;
-          datas.icon = `http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
-
-          return datas;
-        });
+      
 
         // Get temperatures
         const forecastTemp = selected[0].forecastTemp.map(
@@ -85,7 +74,7 @@ const LineChart = () => {
   useEffect(() => {
    
     setTemperature(getTemps(selectedCity, cityList));
-  }, [selectedCity]);
+  }, [selectedCity, cityList]);
 
   return (
     <>

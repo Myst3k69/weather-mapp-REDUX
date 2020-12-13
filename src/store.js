@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from "redux";
+import { createStore } from "redux";
 import allReducers from "./reducers";
 
 // STORE

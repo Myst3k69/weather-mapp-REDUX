@@ -22,7 +22,7 @@ const RadarChart = () => {
   const getDatasRadar = (selectedCity, cityList) => {
     if (selectedCity) {
       const selected = cityList.filter(
-        (city) => city.city == selectedCity[0].selectedCity
+        (city) => city.city === selectedCity[0].selectedCity
       );
 
       if (selected) {
@@ -55,7 +55,7 @@ const RadarChart = () => {
 
   useEffect(() => {
     getDatasRadar(selectedCity, cityList);
-  }, [selectedCity]);
+  }, [selectedCity, cityList]);
 
   return (
     <CCard>

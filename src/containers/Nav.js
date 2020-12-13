@@ -7,8 +7,7 @@ import { seletCity } from "../actions";
 const Nav = () => {
   // Store
   const cityList = useSelector((state) => state.cities);
-  const isLogged = useSelector((state) => state.isLogged);
-  const selectedCity = useSelector((state) => state.selectedCity);
+ 
   const dispatch = useDispatch();
 
   useEffect(() => {});

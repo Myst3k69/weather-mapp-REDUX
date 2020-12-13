@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,} from "react-redux";
 
 import { updateCity } from "../actions";;
 const axios = require("axios");
@@ -16,7 +16,7 @@ export default function useFetch(cityList) {
   // Store
   const dispatch = useDispatch();
 
-  // Function
+  // Function to get coord & forecasts (2 API CALL)
 
   const currentWeather = (city, apiKey) => {
     axios
@@ -37,6 +37,7 @@ export default function useFetch(cityList) {
       });
   };
 
+  // Get forecasts for a city
   const OnecallAPI = (lat, lon, apiKey, city) => {
     axios
       .get(
